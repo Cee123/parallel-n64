@@ -3,7 +3,7 @@ PERF_TEST=0
 HAVE_SHARED_CONTEXT=0
 WITH_CRC=brumme
 FORCE_GLES=1
-HAVE_OPENGL=0
+HAVE_OPENGL=1
 HAVE_VULKAN_DEBUG=0
 GLIDEN64=0
 GLIDEN64CORE=0
@@ -11,11 +11,11 @@ GLIDEN64ES=1
 HAVE_RSP_DUMP=0
 HAVE_RDP_DUMP=0
 HAVE_RICE=1
-HAVE_PARALLEL?=0
+HAVE_PARALLEL?=1
 HAVE_PARALLEL_RSP?=0
 STATIC_LINKING=0
 WANT_LLVM_OVERRIDE=0
-HAVE_LTCG ?=0
+HAVE_LTCG ?=1
 
 DYNAFLAGS :=
 INCFLAGS  :=
@@ -264,6 +264,8 @@ ifneq (,$(findstring unix,$(platform)))
       ifneq (,$(findstring neon,$(platform)))
          CPUFLAGS += -D__NEON_OPT -mfpu=neon
          HAVE_NEON = 1
+	 GLES = 1
+   	 GL_LIB := -lGLESv2
       endif
       PLATFORM_EXT := unix
    endif
